@@ -45,6 +45,8 @@ const updateProfile = async (msg) => {
             `Please make sure you have passed the appropriate amount of arguments`
         );
     }
+    const args = parts.filter((p) => !p.startsWith("-"));
+
 
     const discordUsername = msg.author.username;
     const discordId = msg.author.id;
@@ -61,7 +63,7 @@ const updateProfile = async (msg) => {
                 `Please make sure you have passed appropriate flags : [${flags}]`
             );
         }
-        const value = parts[i + 1];
+        const value = args[Number(i / 2).toFixed(0)];
         if (!validFlags[flagName].validate(value)) {
             return await msg.reply(
                 `Please make sure you have passed an appropriate value for the ${flagName} flag. ${validFlags[flagName].validationMessage}`
